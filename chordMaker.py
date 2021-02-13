@@ -1,18 +1,13 @@
 '''
-This file creates chords based on the degree, key, and scale.
+This file creates chords based on the root notes, key, and scale.
 '''
 
 import generateScale
 
-def buildChord(chordProgression, scaleNotes):
+def buildChord(rootNotes, scaleNotes):
     chordDict = {}
-    rootNotes = []
-    for number in chordProgression:
-        rootNote = scaleNotes[number - 1]
-        rootNotes.append(rootNote)
     progress = 1
     for note in rootNotes:
-        print(note)
         try:
             note2 = scaleNotes[scaleNotes.index(note) + 2]
         except: # if adding 2 makes it out of range of the list, this makes it wrap around
