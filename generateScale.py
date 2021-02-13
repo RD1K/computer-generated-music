@@ -7,8 +7,8 @@ notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 scales = ['Major', 'Minor']
 
 # formulas for major/natural minor scales (2 being a whole step and 1 being a half step)
-majorFormula = [2, 2, 1, 2, 2, 2, 1]
-minorFormula =  [2, 1, 2, 2, 1, 2, 2]
+majorFormula = [2, 2, 1, 2, 2, 2]
+minorFormula =  [2, 1, 2, 2, 1, 2]
 
 # generates the notes in the scale based on key and mode
 def minorScale(key):

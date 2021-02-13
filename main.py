@@ -27,8 +27,10 @@ if scaleType == "Minor":
 elif scaleType == "Major":
     scaleNotes = generateScale.majorScale(keyChoice)
 
+print(scaleNotes)
+
 # creates the pretty_midi object
-pianoMelody = pretty_midi.PrettyMIDI()
+pianoMelody = pretty_midi.PrettyMIDI(initial_tempo=tempo)
 
 # sets the name based on MIDI standards
 piano_program = pretty_midi.instrument_name_to_program("Acoustic Grand Piano")
@@ -41,7 +43,7 @@ previousNoteNumber = 0
 #     note_number = pretty_midi.note_name_to_number(note_name + "5")
 #     if note_number < previousNoteNumber:
 #         note_number += 12
-#     note = pretty_midi.Note(velocity=127, pitch = note_number, start=startTime, end=(startTime + 0.5))
+#     note = pretty_midi.Note(velocity=127, pitch = note_number, start=startTime, end=(beatLength))
 #     piano.notes.append(note)
 #     startTime += beatLength
 #     previousNoteNumber = note_number
@@ -50,7 +52,12 @@ chordProgressionRoots = []
 for x in range(1,8):
     chordProgressionRoots.append(scaleNotes[randrange(1,7)])
 
-chordMaker.buildChord(chordProgressionRoots, scaleNotes)
+chordDict = chordMaker.buildChord(chordProgressionRoots, scaleNotes)
+
+startTime = 0
+for key, value in chordDict.items():
+    print(value)
+
 
 pianoMelody.instruments.append(piano)
 pianoMelody.write("pianoMelody.mid")
