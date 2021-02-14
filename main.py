@@ -11,6 +11,7 @@ from pydub.playback import play
 
 import generateScale
 import chordMaker
+import animation
 
 tempo = randint(80, 160)
 beatLength = 60/tempo
@@ -19,7 +20,7 @@ print("Tempo: " + str(tempo) + " BPM")
 # path to the soundfont
 chordSfDir = "~/Documents/HackathonProject/'Arachno SoundFont - Version 1.0.sf2'"
 melodySfDir = "~/Documents/HackathonProject/'GeneralUser GS v1.471.sf2'"
-# drumSfDir = "~/Documents/HackathonProject/'Snare.SF2'"
+drumSfDir = "~/Documents/HackathonProject/'Snare.SF2'"
 
 # randomly chooses key and scale
 scaleType = generateScale.scales[randrange(len(generateScale.scales))]
