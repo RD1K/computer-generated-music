@@ -2,12 +2,11 @@
 This is the main file of the program.
 '''
 
-import pretty_midi, sys, pyglet
+import pretty_midi, sys
 from os import system
 from random import randrange, randint, uniform
 from pydub import AudioSegment
 from pydub.playback import play
-import speech_recognition as sr
 from time import sleep
 from sys import exit
 
