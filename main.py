@@ -71,9 +71,10 @@ pianoMelody = pretty_midi.PrettyMIDI(initial_tempo=tempo)
 piano_program = pretty_midi.instrument_name_to_program("Acoustic Grand Piano")
 piano = pretty_midi.Instrument(program=piano_program)
 
-startTime = beatLength
-for key, value in chordDict.items():
-    while startTime < (beatLength * 4):
+for x in range(0,4):
+    startTime = beatLength/2 + (beatLength * x * 4) # makes it start at the next measure
+    # ensures that it doesn't play after the new chord starts until supposed to:
+    while startTime < (beatLength * 4 * (x+1)):
         noteIndex = randrange(len(scaleNotes))
         note_name = scaleNotes[noteIndex] + "5"
         note_number = pretty_midi.note_name_to_number(note_name)
@@ -95,5 +96,5 @@ chords = AudioSegment.from_wav("chords.wav")
 system("fluidsynth -ni %s melody.mid -F melody.wav -r 44100 2>/dev/null" % melodySfDir)
 melody = AudioSegment.from_wav("melody.wav")
 
-mixed = melody.overlay(chords)
+mixed = chords.overlay(melody)
 play(mixed * 4)
