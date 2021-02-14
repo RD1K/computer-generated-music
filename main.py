@@ -12,13 +12,14 @@ from pydub.playback import play
 import generateScale
 import chordMaker
 
-tempo = randint(80, 150)
+tempo = randint(80, 160)
 beatLength = 60/tempo
 print("Tempo: " + str(tempo) + " BPM")
 
 # path to the soundfont
 chordSfDir = "~/Documents/HackathonProject/'Arachno SoundFont - Version 1.0.sf2'"
 melodySfDir = "~/Documents/HackathonProject/'GeneralUser GS v1.471.sf2'"
+# drumSfDir = "~/Documents/HackathonProject/'Snare.SF2'"
 
 # randomly chooses key and scale
 scaleType = generateScale.scales[randrange(len(generateScale.scales))]
@@ -89,6 +90,38 @@ for x in range(0,4):
 pianoMelody.instruments.append(piano)
 pianoMelody.write("melody.mid")
 
+# # creates the pretty_midi object
+# drumPattern = pretty_midi.PrettyMIDI(initial_tempo=tempo)
+#
+# # sets the name based on MIDI standards
+# drum_program = pretty_midi.instrument_name_to_program("Synth Drum")
+# drum = pretty_midi.Instrument(program=drum_program)
+
+# for x in range(0,4):
+#     for y in range(0,62,2):
+#         truefalse = randint(2,12)
+#         if truefalse == 2:
+#             velocity = randint(110,120)
+#             delay = round(uniform(0,0.05), 3) # generates a random amount of delay to make it sound more natural/realistic
+#             note = pretty_midi.Note(velocity = velocity, pitch = 60, start = (y*(beatLength/4)), end = ((y*(beatLength/4)) + (beatLength/4)))
+#             drum.notes.append(note)
+#             startTime += beatLength
+#         else:
+#             pass
+#     for y in range(1,63,2):
+#         truefalse = randint(2,12)
+#         if truefalse == 2:
+#             velocity = randint(110,120)
+#             delay = round(uniform(0,0.05), 3) # generates a random amount of delay to make it sound more natural/realistic
+#             note = pretty_midi.Note(velocity = velocity, pitch = 60, start = (y*(beatLength/4)), end = ((y*(beatLength/4)) + (beatLength/4)))
+#             drum.notes.append(note)
+#             startTime += beatLength
+#         else:
+#             pass
+#
+# drumPattern.instruments.append(drum)
+# drumPattern.write("drums.mid")
+
 # synthesizes the MIDI using the soundfont
 system("fluidsynth -ni %s chords.mid -F chords.wav -r 44100 2>/dev/null" % chordSfDir)
 chords = AudioSegment.from_wav("chords.wav")
@@ -96,5 +129,9 @@ chords = AudioSegment.from_wav("chords.wav")
 system("fluidsynth -ni %s melody.mid -F melody.wav -r 44100 2>/dev/null" % melodySfDir)
 melody = AudioSegment.from_wav("melody.wav")
 
+# system("fluidsynth -ni %s drums.mid -F drums.wav -r 44100 2>/dev/null" % drumSfDir)
+# drums = AudioSegment.from_wav("drums.wav")
+
 mixed = chords.overlay(melody)
+# mixed = mixed.overlay(drums)
 play(mixed * 4)
