@@ -71,16 +71,19 @@ pianoMelody = pretty_midi.PrettyMIDI(initial_tempo=tempo)
 piano_program = pretty_midi.instrument_name_to_program("Acoustic Grand Piano")
 piano = pretty_midi.Instrument(program=piano_program)
 
+startTime = beatLength
 for key, value in chordDict.items():
-    for note_name in value:
-        note_name = note_name + "5"
+    while startTime < (beatLength * 4):
+        noteIndex = randrange(len(scaleNotes))
+        note_name = scaleNotes[noteIndex] + "5"
         note_number = pretty_midi.note_name_to_number(note_name)
         note = pretty_midi.note_name_to_number(note_name)
         velocity = randint(105,127)
         delay = round(uniform(0,0.05), 3) # generates a random amount of delay to make it sound more natural/realistic
-        note = pretty_midi.Note(velocity = velocity, pitch = note_number, start = (startTime + delay), end = (startTime + beatLength))
+        length = (beatLength/2)*(randint(1,4))
+        note = pretty_midi.Note(velocity = velocity, pitch = note_number, start = (startTime + delay), end = (startTime + length))
         piano.notes.append(note)
-    startTime += beatLength
+        startTime += length
 
 pianoMelody.instruments.append(piano)
 pianoMelody.write("melody.mid")
@@ -89,10 +92,8 @@ pianoMelody.write("melody.mid")
 system("fluidsynth -ni %s chords.mid -F chords.wav -r 44100 2>/dev/null" % chordSfDir)
 chords = AudioSegment.from_wav("chords.wav")
 
-# system("fluidsynth -ni %s melody.mid -F melody.wav -r 44100 2>/dev/null" % melodySfDir)
-# melody = AudioSegment.from_wav("melody.wav")
-#
-# mixed = melody.overlay(chords)
-# play(mixed)
+system("fluidsynth -ni %s melody.mid -F melody.wav -r 44100 2>/dev/null" % melodySfDir)
+melody = AudioSegment.from_wav("melody.wav")
 
-play(chords * 4)
+mixed = melody.overlay(chords)
+play(mixed * 4)
