@@ -6,18 +6,6 @@ for different scales. It also determines the notes in a scale based on the key a
 notes = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 scales = ['Major', 'Minor']
 
-chordProgressions = [
-    (1,6,4,5),
-    (1,4,5,4),
-    (4,5,6,3),
-    (1,4,2,5),
-    (1,3,6,4),
-    (1,7,6,5),
-    (1,3,4,3),
-    (1,4,5,1),
-    (1,7,6,4)
-]
-
 # formulas for major/natural minor scales (2 being a whole step and 1 being a half step)
 majorFormula = [2, 2, 1, 2, 2, 2]
 minorFormula =  [2, 1, 2, 2, 1, 2]
