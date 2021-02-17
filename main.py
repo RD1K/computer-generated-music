@@ -14,8 +14,8 @@ import generateScale
 import chordMaker
 
 # path to the soundfont
-chordSfDir = "~/Documents/HackathonProject/'Arachno SoundFont - Version 1.0.sf2'"
-melodySfDir = "~/Documents/HackathonProject/'GeneralUser GS v1.471.sf2'"
+chordSfDir = "~/computer-generated-music/'Arachno SoundFont - Version 1.0.sf2'"
+melodySfDir = "~/computer-generated-music/'GeneralUser GS v1.471.sf2'"
 
 def mainFunction():
     tempo = randint(80, 160)
