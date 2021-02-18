@@ -1,9 +1,9 @@
 # computer-generated-music
 
-This project was begun as part of a hackathon. It randomly generates original piano music and plays it.
+This project was begun as part of a hackathon. It randomly generates original piano music and plays it. Also, the audio for the chords and the melody are written to WAV files which you can use in your own music. The patterns are written to MIDI files which you can use with other virtual instruments or samples to create music, using a DAW.
 
 ## Example
-
+See a screen recording of this project [here](https://vimeo.com/513632892).
 
 ## Setup
 
